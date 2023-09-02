@@ -1,4 +1,3 @@
-# docker-compose.production.yml
 version: '3'
 
 volumes:
@@ -10,18 +9,18 @@ services:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data_production: /var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   backend:
     image: viktorourso/taski_backend
     env_file: .env
     volumes:
-      - static_volume: /app/backend_static
+      - static_volume:/backend_static
   frontend:
     image: viktorourso/taski_frontend
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_volume: /app/frontend_static
+      - static_volume:/frontend_static
   gateway:
     image: viktorourso/taski_gateway
     env_file: .env
